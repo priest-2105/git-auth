@@ -1,10 +1,10 @@
-# Git Account Switcher
+# Git Auth
 
 This tool helps you easily switch between multiple GitHub accounts by automating login/logout using GitHub CLI and Git aliases.
 
 ## Setup Instructions
 
-Follow these steps to set up the Git Account Switcher on your system:
+Follow these steps to set up the Git Auth on your system:
 
 ### 1. Clone this repository:
 
