@@ -1,18 +1,37 @@
 #!/bin/bash
 
-# Create the necessary scripts directory
-mkdir -p ~/.git-account-switcher
+#  Adding Git aliases to global config
+echo "Adding Git aliases for account login/logout..."
+git config --global alias.account-logout '!sh ~/git-account-logout.sh'
+git config --global alias.account-login '!sh ~/git-account-login.sh'
 
-# Download the login/logout scripts
-curl -o ~/.git-account-switcher/git-account-login.sh https://raw.githubusercontent.com/your-repo/git-account-switcher/main/git-account-login.sh
-curl -o ~/.git-account-switcher/git-account-logout.sh https://raw.githubusercontent.com/your-repo/git-account-switcher/main/git-account-logout.sh
+#  Creating 'git-account-login.sh' file
+echo "Creating git-account-login.sh script..."
+cat <<EOL > ~/git-account-login.sh
+#!/bin/bash
+# Use Windows Command Prompt to trigger GitHub CLI login
+winpty gh auth login
+echo "GitHub account login triggered via GitHub CLI."
+EOL
 
-# Make the scripts executable
-chmod +x ~/.git-account-switcher/git-account-login.sh
-chmod +x ~/.git-account-switcher/git-account-logout.sh
+# Creating 'git-account-logout.sh' file
+echo "Creating git-account-logout.sh script..."
+cat <<EOL > ~/git-account-logout.sh
+#!/bin/bash
+# Delete GitHub credentials from Windows Credential Manager
+cmdkey /delete:git:https://github.com
+echo "GitHub credentials removed from Windows Credential Manager."
+EOL
 
-# Add Git aliases
-git config --global alias.account-login '!sh ~/.git-account-switcher/git-account-login.sh'
-git config --global alias.account-logout '!sh ~/.git-account-switcher/git-account-logout.sh'
+#  Making the scripts executable
+chmod +x ~/git-account-login.sh
+chmod +x ~/git-account-logout.sh
 
-echo "Git account switcher setup complete!"
+# GitHub CLI installation Verification
+if ! command -v gh &> /dev/null
+then
+    echo "GitHub CLI (gh) not found. Please install GitHub CLI to continue."
+    exit
+fi
+
+echo "Setup completed successfully! You can now use git account-login and git account-logout commands."
