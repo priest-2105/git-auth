@@ -31,8 +31,16 @@ bash setup.sh
 
 Once the setup is complete, you can use the following commands to switch between GitHub accounts:
 
+To login 
+
 ```bash
 git account-login
+```
+
+To logout 
+
+```bash
+git account-logout
 ```
 
 
