@@ -11,7 +11,7 @@ Follow these steps to set up the Git Account Switcher on your system:
 To download the tool, clone the repository using the following command:
 
 ```bash
-git clone https://github.com/your-username/git-account-switcher.git
+git clone https://github.com/priest-2105/git-auth.git
 
 ```
 
